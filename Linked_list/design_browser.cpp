@@ -1,55 +1,54 @@
-#include <iostream>
-#include <string>
-using namespace std;
-
-class Node {
+class node {
 public:
-    Node* next;
-    Node* prev;
+    node* next;
+    node* prev;
     string val;
 
-    Node(string data) : next(nullptr), prev(nullptr), val(data) {}
+    node() : next(nullptr), prev(nullptr), val("") {}
+    node(string data) : next(nullptr), prev(nullptr), val(data) {}
 };
 
 class BrowserHistory {
-private:
-    Node* current;
-
 public:
+    node* temp;
+
     BrowserHistory(string homepage) {
-        current = new Node(homepage);
+        temp = new node(homepage);
     }
 
     void visit(string url) {
-        // Clear forward history
-        if (current->next) {
-            current->next = nullptr;
-        }
-        Node* newNode = new Node(url);
-        newNode->prev = current;
-        current->next = newNode;
-        current = newNode;
+        if (temp->next != nullptr)
+            temp->next = nullptr;
+        node* newnode = new node(url);
+        temp->next = newnode;
+        newnode->prev = temp;
+        temp = newnode; //temp represents the current webpage on which system is at
     }
 
     string back(int steps) {
-        while (steps-- > 0 && current->prev) {
-            current = current->prev;
+        node* t = temp;
+        for (int i = 0; i < steps && t->prev; i++) {
+            t = t->prev;
         }
-        return current->val;
+        temp = t;
+        return t->val;
     }
 
     string forward(int steps) {
-        while (steps-- > 0 && current->next) {
-            current = current->next;
+        node* t = temp;
+        for (int i = 0; i < steps && t->next; i++) {
+            t = t->next;
         }
-        return current->val;
+        temp = t;
+        return t->val;
     }
 };
 
 /**
- * Usage:
- * BrowserHistory* obj = new BrowserHistory("homepage.com");
- * obj->visit("page1.com");
- * string backPage = obj->back(1);
- * string forwardPage = obj->forward(1);
+ * Your BrowserHistory object will be instantiated and called as such:
+ * BrowserHistory* obj = new BrowserHistory(homepage);
+ * obj->visit(url);
+ * string param_2 = obj->back(steps);
+ * string param_3 = obj->forward(steps);
  */
+
