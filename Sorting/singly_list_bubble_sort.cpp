@@ -67,21 +67,19 @@ public:
     }
 
     void pop_back() {
-        if (head == NULL) {
-            cout << "DLL is empty\n";
-            return;
-        }
+    if (head == NULL)
+    return;
 
-        Node* temp = tail;
-        tail = tail->prev;
+    Node* temp = head;
 
-        if (tail != NULL)
-            tail->next = NULL;
-        else
-            head = NULL;
+   while (temp->next != tail) {
+    temp = temp->next;
+   }
 
-        delete temp;
-    }
+   temp->next = NULL;
+   delete tail;
+    tail = temp;
+}
 
     void deleteMiddle() {
         int pos;
