@@ -49,7 +49,6 @@ public:
         return currSize == 0;
     }
 
-    // New method to print the entire internal array
     void printArr() {
         for (int i = 0; i < cap; i++) {
             cout << arr[i] << " ";
@@ -66,6 +65,14 @@ int main() {
     cq.pop();
     cq.push(4);
 
-    cq.printArr();
+    // cq.printArr(); // Commented out as per the image
+
+    // Logic to print the queue contents by dequeuing all elements
+    while(!cq.empty()) {
+        cout << cq.front() << " ";
+        cq.pop();
+    }
+    cout << endl;
+
     return 0;
 }
