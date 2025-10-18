@@ -1,49 +1,74 @@
-class QueueList {
-    Node* front;
-    Node* rear;
+#include <iostream>
+using namespace std;
+
+class Node {
 public:
-    QueueList() {
-        front = rear = NULL;
-    }
+    int data;
+    Node* next;
 
-    bool isEmpty() { return front == NULL; }
-
-    void enqueue(int x) {
-        Node* temp = new Node;
-        temp->data = x;
-        temp->next = NULL;
-        if (rear == NULL) {
-            front = rear = temp;
-            return;
-        }
-        rear->next = temp;
-        rear = temp;
-    }
-
-    void dequeue() {
-        if (isEmpty()) cout << "Queue Underflow\n";
-        else {
-            Node* temp = front;
-            front = front->next;
-            if (front == NULL) rear = NULL;
-            delete temp;
-        }
-    }
-
-    int Front() {
-        if (isEmpty()) {
-            cout << "Queue Empty\n";
-            return -1;
-        }
-        return front->data;
-    }
-
-    void display() {
-        Node* temp = front;
-        while (temp) {
-            cout << temp->data << " ";
-            temp = temp->next;
-        }
-        cout << endl;
+    Node(int val) {
+        data = val;
+        next = NULL;
     }
 };
+
+class Queue {
+private:
+    Node* head;
+    Node* tail;
+
+public:
+    Queue() {
+        head = tail = NULL;
+    }
+
+    bool empty() {
+        return head == NULL;
+    }
+
+    void push(int data) {
+        Node* newNode = new Node(data);
+
+        if(empty()) {
+            head = tail = newNode;
+        } else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+    }
+
+    void pop() {
+        if(empty()) {
+            cout << "LL is EMPTY" << endl;
+            return;
+        }
+
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+    }
+
+    int front() {
+        if(empty()) {
+            cout << "LL is EMPTY" << endl;
+            return -1;
+        }
+        return head->data;
+    }
+};
+
+int main() {
+    Queue q;
+
+    q.push(1);
+    q.push(2);
+    q.push(3);
+
+    while(!q.empty()) {
+        cout << q.front() << " ";
+        q.pop();
+    }
+
+    cout << endl;
+    return 0;
+}
