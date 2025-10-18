@@ -1,3 +1,7 @@
+#include <iostream>
+
+using namespace std;
+
 class CircularQueue {
     int* arr;
     int currSize, cap;
@@ -13,7 +17,7 @@ public:
     }
 
     void push(int data) {
-        if (currSize == cap) { //check if queue is full 
+        if (currSize == cap) { // check if queue is full
             cout << "CQ is FULL\n";
             return;
         }
@@ -24,7 +28,7 @@ public:
     }
 
     void pop() {
-        if (empty()) { //check if queue is empty
+        if (empty()) { // check if queue is empty
             cout << "CQ is EMPTY\n";
             return;
         }
@@ -44,6 +48,14 @@ public:
     bool empty() {
         return currSize == 0;
     }
+
+    // New method to print the entire internal array
+    void printArr() {
+        for (int i = 0; i < cap; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
 };
 
 int main() {
@@ -51,6 +63,9 @@ int main() {
     cq.push(1);
     cq.push(2);
     cq.push(3);
-    cq.push(4); 
+    cq.pop();
+    cq.push(4);
+
+    cq.printArr();
     return 0;
 }
