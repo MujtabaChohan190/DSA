@@ -57,12 +57,9 @@ public:
         }
         cout << endl;
     }
-
-    // Giving access to copyStack() function
-    friend void copyStack(StackList *S1, StackList *S2);
 };
 
-// 🔹 Function to copy S1 → S2
+// 🔹 Function to copy S1 → S2 (no friend needed)
 void copyStack(StackList *S1, StackList *S2) {
     StackList temp;
 
@@ -100,6 +97,7 @@ int main() {
 
     return 0;
 }
+
 
 /*If we traverse S1 from top to bottom and directly push data into S2,
 the order will get reversed.*/
