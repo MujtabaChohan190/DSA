@@ -50,17 +50,33 @@ void inorder(Node* root) {
     inorder(root->right);
 }
 
+void postOrder(Node* root) {
+    if (root == NULL) {
+        return;
+    }
+
+    postOrder(root->left);
+    postOrder(root->right);
+    cout << root->data << " ";
+}
+
 int main() {
     vector<int> preorder = {1, 2, -1, -1, 3, 4, -1, -1, 5, -1, -1};
 
+    // Reset idx for buildTree since main might be called multiple times in some environments
+    idx = -1;  //nor part if single traversal
     Node* root = buildTree(preorder);
 
-    cout << "Preorder Traversal: ";
+    cout << "Preorder Traversal:  ";
     preOrder(root);
     cout << endl;
 
-    cout << "Inorder Traversal: ";
+    cout << "Inorder Traversal:   ";
     inorder(root);
+    cout << endl;
+    
+    cout << "Postorder Traversal: ";
+    postOrder(root);
     cout << endl;
 
     return 0;
