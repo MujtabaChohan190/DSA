@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue> // Required for levelOrder
 using namespace std;
 
 class Node {
@@ -60,11 +61,35 @@ void postOrder(Node* root) {
     cout << root->data << " ";
 }
 
+void levelOrder(Node* root) {
+    if (root == NULL) {
+        return;
+    }
+
+    queue<Node*> q;
+    q.push(root);
+
+    while(q.size() > 0) {
+        Node* curr = q.front();
+        q.pop();
+
+        cout << curr->data << " ";
+
+        if(curr->left != NULL) {
+            q.push(curr->left);
+        }
+        if(curr->right != NULL) {
+            q.push(curr->right);
+        }
+    }
+    cout << endl;
+}
+
 int main() {
     vector<int> preorder = {1, 2, -1, -1, 3, 4, -1, -1, 5, -1, -1};
 
-    // Reset idx for buildTree since main might be called multiple times in some environments
-    idx = -1;  //nor part if single traversal
+    // Reset idx for buildTree
+    idx = -1; 
     Node* root = buildTree(preorder);
 
     cout << "Preorder Traversal:  ";
@@ -78,6 +103,10 @@ int main() {
     cout << "Postorder Traversal: ";
     postOrder(root);
     cout << endl;
+
+    cout << "Level Order Traversal:";
+    levelOrder(root);
+    // Newline is already printed inside levelOrder, so no extra endl needed here.
 
     return 0;
 }
