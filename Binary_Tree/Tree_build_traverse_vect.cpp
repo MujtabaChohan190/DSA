@@ -61,6 +61,7 @@ void postOrder(Node* root) {
     cout << root->data << " ";
 }
 
+// 🌿 Level Order Traversal (all nodes in one line)
 void levelOrder(Node* root) {
     if (root == NULL) {
         return;
@@ -69,7 +70,7 @@ void levelOrder(Node* root) {
     queue<Node*> q;
     q.push(root);
 
-    while(q.size() > 0) {
+    while(!q.empty()) {
         Node* curr = q.front();
         q.pop();
 
@@ -83,6 +84,38 @@ void levelOrder(Node* root) {
         }
     }
     cout << endl;
+}
+
+// 🌳 Level Order Traversal (each level printed on a new line)
+void levelOrderByLevel(Node* root) {
+    if (root == NULL) {
+        return;
+    }
+
+    queue<Node*> q;
+    q.push(root);
+    q.push(NULL); // Level delimiter
+
+    while(!q.empty()) {
+        Node* curr = q.front();
+        q.pop();
+
+        if (curr == NULL) {
+            cout << endl; // End of level
+            if (!q.empty()) {
+                q.push(NULL); // Add new delimiter
+            }
+        } else {
+            cout << curr->data << " ";
+
+            if(curr->left != NULL) {
+                q.push(curr->left);
+            }
+            if(curr->right != NULL) {
+                q.push(curr->right);
+            }
+        }
+    }
 }
 
 int main() {
@@ -104,9 +137,12 @@ int main() {
     postOrder(root);
     cout << endl;
 
-    cout << "Level Order Traversal:";
+    cout << "Level Order Traversal (Single Line): ";
     levelOrder(root);
-    // Newline is already printed inside levelOrder, so no extra endl needed here.
+
+    cout << "Level Order Traversal (By Level):" << endl;
+    levelOrderByLevel(root);
 
     return 0;
 }
+
