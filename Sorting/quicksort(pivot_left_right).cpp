@@ -8,20 +8,27 @@ int partition(int arr[], int st, int end) {
     for (int j = st; j < end; j++) {
         if (arr[j] <= pivot) {
             idx++;
-            swap(arr[j], arr[idx]);
+            // manual swap arr[j] and arr[idx]
+            int temp = arr[j];
+            arr[j] = arr[idx];
+            arr[idx] = temp;
         }
     }
 
     idx++;
-    swap(arr[end], arr[idx]);
+    // manual swap arr[end] and arr[idx]
+    int temp = arr[end];
+    arr[end] = arr[idx];
+    arr[idx] = temp;
+
     return idx;
 }
 
 void quickSort(int arr[], int st, int end) {
     if (st < end) {
         int pivIdx = partition(arr, st, end);
-        quickSort(arr, st, pivIdx - 1);
-        quickSort(arr, pivIdx + 1, end);
+        quickSort(arr, st, pivIdx - 1);    // left side
+        quickSort(arr, pivIdx + 1, end);  // right side
     }
 }
 
