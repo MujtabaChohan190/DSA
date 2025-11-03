@@ -81,7 +81,7 @@ Node* delNode(Node* root, int key) {
         }
         // Case 3: Two children
         else {
-            Node* IS = getInorderSuccessor(root->right); 
+            Node* IS = getInorderSuccessor(root->right);  //for eg here we have found the node to delete ie 5 , we go to its right to get inorder successor as its right subtree leftmost value
             root->data = IS->data; // Replace
             root->right = delNode(root->right, IS->data); // Remove duplicate
         }
