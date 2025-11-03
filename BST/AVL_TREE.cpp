@@ -31,8 +31,8 @@ int getBalance(Node* node) {
 }
 
 
-// left rotation
-Node* leftRotate(Node* y) {
+// right rotation is done if imbalanced node is on left 
+Node* rightRotate(Node* y) {
     Node* x = y->left;
     Node* T2 = x->right;
 
