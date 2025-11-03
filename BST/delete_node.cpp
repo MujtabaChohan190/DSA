@@ -68,7 +68,7 @@ Node* delNode(Node* root, int key) {
         // Node found
 
         // Case 1: No left child
-        if (root->left == NULL) {
+        if (root->left == NULL) { //in both 0 and 1 children , we had to return not null and null value and also delete the node so if left is null , right is not null and vice versa
             Node* temp = root->right;
             delete root;
             return temp;
