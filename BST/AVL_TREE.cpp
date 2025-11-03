@@ -21,8 +21,15 @@ int getHeight(Node* node) {
 
 
 int getBalance(Node* node) {
-    return node ? getHeight(node->left) - getHeight(node->right) : 0;
+    if (node == NULL) {
+        return 0;   // If no node, balance factor is 0
+    }
+    else {
+        // Balance = height of left subtree - height of right subtree
+        return getHeight(node->left) - getHeight(node->right);
+    }
 }
+
 
 // Right rotation
 Node* rightRotate(Node* y) {
