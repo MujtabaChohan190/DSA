@@ -10,10 +10,15 @@ public:
     Node(int val) : data(val), left(nullptr), right(nullptr), height(1) {}
 };
 
-// Utility functions
-    int getHeight(Node* node) {
-    return node ? node->height : 0;
+int getHeight(Node* node) {
+    if (node == NULL) {
+        return 0;   // if there is no node, height is 0
+    }
+    else {
+        return node->height; // otherwise return its stored height
+    }
 }
+
 
 int getBalance(Node* node) {
     return node ? getHeight(node->left) - getHeight(node->right) : 0;
