@@ -112,41 +112,25 @@ public:
 };
 
 int main() {
-    int size;
-    cout << "Enter stack size: ";
-    cin >> size;
+    MyStack s(5);  // Create a stack of size 5
 
-    MyStack s(size);
+    s.push(10);
+    s.push(20);
+    s.push(30);
 
-    int choice, value;
-    do {
-        cout << "\n1. Push\n2. Pop\n3. Top\n4. Empty\n5. Exit\nEnter choice: ";
-        cin >> choice;
+    cout << "Top element: " << s.top() << endl;  // Should print 30
 
-        switch (choice) {
-        case 1:
-            cout << "Enter value: ";
-            cin >> value;
-            s.push(value);
-            break;
-        case 2:
-            value = s.pop();
-            if (value != -1)
-                cout << "Popped: " << value << endl;
-            break;
-        case 3:
-            cout << "Top: " << s.top() << endl;
-            break;
-        case 4:
-            cout << (s.empty() ? "Stack is empty" : "Stack is not empty") << endl;
-            break;
-        case 5:
-            cout << "Exiting...\n";
-            break;
-        default:
-            cout << "Invalid choice!\n";
-        }
-    } while (choice != 5);
+    cout << "Popped: " << s.pop() << endl;       // Removes 30
+    cout << "Popped: " << s.pop() << endl;       // Removes 20
+
+    cout << "Top element: " << s.top() << endl;  // Should print 10
+
+    s.push(40);
+    s.push(50);
+
+    cout << "Popped: " << s.pop() << endl;       // Removes 50
+    cout << "Top element: " << s.top() << endl;  // Should print 40
 
     return 0;
 }
+
