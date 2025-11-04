@@ -29,23 +29,15 @@ Node* buildTree(int preorder[], int n) {
     return root;
 }
 
-// Check if Two Trees are Identical
-bool isIdentical(Node* root1, Node* root2) {
-
-    // If both are empty
-    if (root1 == NULL && root2 == NULL) {
-        return true;
+bool isSameTree(TreeNode* p, TreeNode* q) {
+    if (p == NULL || q == NULL) {
+        return p == q;
     }
 
-    // If one is empty but not the other
-    if (root1 == NULL || root2 == NULL) {
-        return false;
-    }
+    bool isLeftSame = isSameTree(p->left, q->left);
+    bool isRightSame = isSameTree(p->right, q->right);
 
-    // Check root & both subtrees
-    return (root1->data == root2->data) &&
-           isIdentical(root1->left, root2->left) &&
-           isIdentical(root1->right, root2->right);
+    return isLeftSame && isRightSame && p->val == q->val;
 }
 
 // Simple Preorder Display (Optional)
