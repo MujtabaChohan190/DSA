@@ -1,6 +1,5 @@
 #include <iostream>
-#include <vector>
-#include <queue> // Required for levelOrder
+#include <queue>
 using namespace std;
 
 class Node {
@@ -15,115 +14,91 @@ public:
     }
 };
 
-static int idx = -1;
+int idx = -1; // Global index
 
-Node* buildTree(vector<int> preorder) {
+Node* buildTree(int preorder[], int n) {
     idx++;
-
-    if(preorder[idx] == -1) {
+    if (idx >= n || preorder[idx] == -1) {
         return NULL;
     }
 
     Node* root = new Node(preorder[idx]);
-    root->left = buildTree(preorder);
-    root->right = buildTree(preorder);
+    root->left = buildTree(preorder, n);
+    root->right = buildTree(preorder, n);
 
     return root;
 }
 
 void preOrder(Node* root) {
-    if (root == NULL) {
-        return;
-    }
-    
+    if (root == NULL) return;
     cout << root->data << " ";
     preOrder(root->left);
     preOrder(root->right);
 }
 
 void inorder(Node* root) {
-    if (root == NULL) {
-        return;
-    }
-    
+    if (root == NULL) return;
     inorder(root->left);
     cout << root->data << " ";
     inorder(root->right);
 }
 
 void postOrder(Node* root) {
-    if (root == NULL) {
-        return;
-    }
-
+    if (root == NULL) return;
     postOrder(root->left);
     postOrder(root->right);
     cout << root->data << " ";
 }
 
-// 🌿 Level Order Traversal (all nodes in one line)
+// Level Order (Single Line)
 void levelOrder(Node* root) {
-    if (root == NULL) {
-        return;
-    }
+    if (root == NULL) return;
 
     queue<Node*> q;
     q.push(root);
 
-    while(!q.empty()) {
-        Node* curr = q.front();
+    while (!q.empty()) {
+        Node* curr = q.front(); 
         q.pop();
 
         cout << curr->data << " ";
 
-        if(curr->left != NULL) {
-            q.push(curr->left);
-        }
-        if(curr->right != NULL) {
-            q.push(curr->right);
-        }
+        if (curr->left) q.push(curr->left);
+        if (curr->right) q.push(curr->right);
     }
     cout << endl;
 }
 
-// 🌳 Level Order Traversal (each level printed on a new line)
+// Level Order (Each Level New Line)
 void levelOrderByLevel(Node* root) {
-    if (root == NULL) {
-        return;
-    }
+    if (root == NULL) return;
 
     queue<Node*> q;
     q.push(root);
-    q.push(NULL); // Level delimiter
+    q.push(NULL);
 
-    while(!q.empty()) {
+    while (!q.empty()) {
         Node* curr = q.front();
         q.pop();
 
         if (curr == NULL) {
-            cout << endl; // End of level
-            if (!q.empty()) {
-                q.push(NULL); // Add new delimiter
-            }
+            cout << endl;
+            if (!q.empty()) q.push(NULL);
         } else {
             cout << curr->data << " ";
-
-            if(curr->left != NULL) {
-                q.push(curr->left);
-            }
-            if(curr->right != NULL) {
-                q.push(curr->right);
-            }
+            if (curr->left) q.push(curr->left);
+            if (curr->right) q.push(curr->right);
         }
     }
 }
 
 int main() {
-    vector<int> preorder = {1, 2, -1, -1, 3, 4, -1, -1, 5, -1, -1};
 
-    // Reset idx for buildTree
-    idx = -1; 
-    Node* root = buildTree(preorder);
+    int preorder[] = {1, 2, -1, -1, 3, 4, -1, -1, 5, -1, -1};
+    int n = sizeof(preorder)/sizeof(preorder[0]);
+
+    idx = -1;
+    Node* root = buildTree(preorder, n);
 
     cout << "Preorder Traversal:  ";
     preOrder(root);
@@ -132,15 +107,15 @@ int main() {
     cout << "Inorder Traversal:   ";
     inorder(root);
     cout << endl;
-    
+
     cout << "Postorder Traversal: ";
     postOrder(root);
     cout << endl;
 
-    cout << "Level Order Traversal (Single Line): ";
+    cout << "Level Order (Single Line): ";
     levelOrder(root);
 
-    cout << "Level Order Traversal (By Level):" << endl;
+    cout << "Level Order (By Level):" << endl;
     levelOrderByLevel(root);
 
     return 0;
