@@ -5,7 +5,7 @@
       - Worst Case: O(n²) (when pivot is always smallest/largest)
    
    SPACE COMPLEXITY: O(log n) due to recursive call stack (in-place, no extra array)
-   
+   Both merge sort and quicksort have same time complexity 
    STABLE OR NOT:
       - NOT STABLE — because swapping elements around the pivot can change 
         the order of equal elements.
