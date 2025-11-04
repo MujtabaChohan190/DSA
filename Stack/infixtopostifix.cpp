@@ -22,7 +22,7 @@ string infixToPrefix(string infix) {
 
         // If operand, add it to the prefix string
         if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
-            prefix = c + prefix;
+            prefix += c;
         }
         // If closing parenthesis ')', push it
         else if (c == ')') {
