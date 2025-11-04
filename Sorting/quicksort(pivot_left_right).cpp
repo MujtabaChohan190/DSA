@@ -1,3 +1,21 @@
+/* 
+   TIME COMPLEXITY:
+      - Best Case: O(n log n)
+      - Average Case: O(n log n)
+      - Worst Case: O(n²) (when pivot is always smallest/largest)
+   
+   SPACE COMPLEXITY: O(log n) due to recursive call stack (in-place, no extra array)
+   
+   STABLE OR NOT:
+      - NOT STABLE — because swapping elements around the pivot can change 
+        the order of equal elements.
+   
+   1️⃣ Choose a pivot element.
+   2️⃣ Partition the array so that smaller elements go left, larger go right.
+   3️⃣ Recursively apply Quick Sort on both sides of the pivot.
+*/
+
+
 #include <iostream>
 using namespace std;
 
