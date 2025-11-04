@@ -47,44 +47,25 @@ public:
 // ===============================
 int main() {
     StackArray s;
-    int choice, value;
 
-    while (true) {
-        cout << "\n--- STACK MENU ---\n";
-        cout << "1. Push\n";
-        cout << "2. Pop\n";
-        cout << "3. Peek (Top Element)\n";
-        cout << "4. Display\n";
-        cout << "5. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
+    s.push(10);
+    s.push(20);
+    s.push(30);
 
-        switch (choice) {
-            case 1:
-                cout << "Enter value to push: ";
-                cin >> value;
-                s.push(value);
-                break;
+    cout << "After pushing elements: ";
+    s.display();
 
-            case 2:
-                s.pop();
-                break;
+    cout << "Top element: " << s.peek() << endl;
 
-            case 3:
-                cout << "Top element is: " << s.peek() << endl;
-                break;
+    s.pop();
+    cout << "After one pop: ";
+    s.display();
 
-            case 4:
-                s.display();
-                break;
+    s.push(40);
+    cout << "After pushing 40: ";
+    s.display();
 
-            case 5:
-                cout << "Exiting program...\n";
-                return 0;
-
-            default:
-                cout << "Invalid choice! Try again.\n";
-        }
-    }
+    return 0;
 }
+
 
