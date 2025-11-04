@@ -1,6 +1,9 @@
 /* TIME COMPLEXITY IN ALL CASES IS O(n LOGN)
    SPACE COMPLEXITY IS O(N) TAKES AUXILARYSPACE IN FORM OF TEMP VARIABE
-   STABLE - PRESERVES THE ORDER OF EQUAL ELEMENTS - Merge Sort is stable because when equal elements are compared, it copies the element from the left subarray first, preserving their original order.*/
+   STABLE - PRESERVES THE ORDER OF EQUAL ELEMENTS - Merge Sort is stable because when equal elements are compared, it copies the element from the left subarray first, preserving their original order.
+1️⃣ Divide the array into two halves until each part has one element.
+2️⃣ Sort & Merge the halves by comparing elements into a temporary array.
+3️⃣ Copy back the merged (sorted) result into the original array */
 
 #include <iostream>
 using namespace std;
