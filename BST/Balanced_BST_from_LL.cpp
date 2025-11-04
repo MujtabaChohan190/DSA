@@ -41,7 +41,7 @@ Node* insert(Node* root, int value) {
 
 // ---------------- Linked List Helper Functions -------------------
 
-// Append node to Linked List
+// Append node to Linked List we write this function to use in inorder
 void appendToList(ListNode*& head, int value) {
     if (head == nullptr) {
         head = new ListNode(value);
