@@ -13,10 +13,11 @@ public:
     }
 
     void insert(int val) {
+        //Insert new element at the end of heap
         size = size + 1;
         int index = size;
         arr[index] = val;
-
+        //compare it with its parent - swap until heap property is restored ( heapify - up)
         while(index > 1) {
             int parent = index / 2;
 
@@ -45,6 +46,7 @@ public:
 
         // replace root with last element and reduce size
         arr[1] = arr[size];
+        //decrease heap size 
         size--;
 
         // take root node to its correct position (heapify down)
