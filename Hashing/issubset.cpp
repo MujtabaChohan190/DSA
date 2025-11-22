@@ -29,6 +29,7 @@ void insert(int x) {
     if (hashTable[index] == nullptr) {
         hashTable[index] = newNode;
     } else {
+        // Collision occurred, add to the end of linked list
         Node* temp = hashTable[index];
         while (temp->next != nullptr) {
             temp = temp->next;
