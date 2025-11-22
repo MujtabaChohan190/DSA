@@ -1,60 +1,83 @@
 #include <iostream>
 using namespace std;
 
-#define TABLE_SIZE 100
+// Node class for linked list (used for chaining)
+class Node {
+public:
+    int key;
+    Node* next;
 
-int hashFunc(int key) {
-    return key % TABLE_SIZE;
-}
-
-void insertKey(int table[], int key) {
-    int index = hashFunc(key);
-    while (table[index] != -1) {
-        index = (index + 1) % TABLE_SIZE;
+    Node(int k) {
+        key = k;
+        next = nullptr;
     }
-    table[index] = key;
+};
+
+const int TABLE_SIZE = 13;
+Node* hashTable[TABLE_SIZE] = {nullptr}; // Initialize all to nullptr
+
+// Simple hash function
+int hashFunction(int x) {
+    return x % TABLE_SIZE;
 }
 
-bool searchKey(int table[], int key) {
-    int index = hashFunc(key);
-    int start = index;
+// Insert element into hash table using chaining
+void insert(int x) {
+    int index = hashFunction(x);
+    Node* newNode = new Node(x);
 
-    while (table[index] != -1) {
-        if (table[index] == key)
+    if (hashTable[index] == nullptr) {
+        hashTable[index] = newNode;
+    } else {
+        Node* temp = hashTable[index];
+        while (temp->next != nullptr) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+}
+
+// Search for an element in the hash table
+bool search(int x) {
+    int index = hashFunction(x);
+    Node* temp = hashTable[index];
+
+    while (temp != nullptr) {
+        if (temp->key == x)
             return true;
-        index = (index + 1) % TABLE_SIZE;
-        if (index == start)
-            return false;
+        temp = temp->next;
     }
     return false;
 }
 
+// Function to check if b[] is a subset of a[]
 bool isSubset(int a[], int m, int b[], int n) {
-    int table[TABLE_SIZE];
-    for (int i = 0; i < TABLE_SIZE; i++)
-        table[i] = -1;
-
+    // Step 1: Insert all elements of a[] into hash table
     for (int i = 0; i < m; i++)
-        insertKey(table, a[i]);
+        insert(a[i]);
 
-    for (int i = 0; i < n; i++) {
-        if (!searchKey(table, b[i]))
-            return false;
+    // Step 2: Check each element of b[] in hash table
+    for (int j = 0; j < n; j++) {
+        bool found = search(b[j]);  // search() returns true if element exists
+        if (found == false) {       // explicitly check for false
+            return false;           // Element of b[] not found
+        }
     }
-    return true;
+    return true; // All elements of b[] found
 }
 
 int main() {
-    int a[] = {10, 20, 30, 40, 50};
-    int b[] = {20, 40};
+    int a[] = {11, 1, 13, 21, 3, 7};
+    int b[] = {11, 3, 7, 1};
 
-    int m = sizeof(a) / sizeof(a[0]);
-    int n = sizeof(b) / sizeof(b[0]);
+    int m = sizeof(a)/sizeof(a[0]);
+    int n = sizeof(b)/sizeof(b[0]);
 
     if (isSubset(a, m, b, n))
-        cout << "b[] IS a subset of a[]";
+        cout << "b[] IS a subset of a[]" << endl;
     else
-        cout << "b[] is NOT a subset of a[]";
+        cout << "b[] is NOT a subset of a[]" << endl;
 
     return 0;
 }
+
