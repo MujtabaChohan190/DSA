@@ -24,8 +24,8 @@ bool isCBT(Node* root, int index, int cnt) {
     if(index >= cnt)
         return false;
    //check if left or right node does not exceeed the bound of total nodes count
-    bool left = isCBT(root->left, 2*index + 1, cnt);
-    bool right = isCBT(root->right, 2*index + 2, cnt);
+    bool left = isCBT(root->left, 2*index, cnt);
+    bool right = isCBT(root->right, 2*index + 1, cnt);
     return left && right;
 }
 
