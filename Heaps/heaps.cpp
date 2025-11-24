@@ -80,7 +80,7 @@ public:
         int idx = size;
         arr[idx] = val;
 
-        // Heapify Up (Min Heap)
+        // Heapify Up (Min Heap) - in min heap parent should be smallest so we check if its not greater
         while(idx > 1)
         {
             int parent = idx / 2;
