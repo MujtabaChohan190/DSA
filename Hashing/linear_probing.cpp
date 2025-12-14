@@ -17,9 +17,8 @@ int hashFunction(int key) {
 
 // Insert key-value pair
 void insert(int key, string value) {
-    // 1. Calculate the initial index
     int index = hashFunction(key);
-    int startIndex = index; // To detect if a full circle has been made (full table)
+    int startIndex = index; // To detect if a full circle has been made
 
     // Linear probing for empty slot
     while (occupied[index]) {
@@ -29,18 +28,14 @@ void insert(int key, string value) {
             cout << "Updated key " << key << " with new value." << endl;
             return;
         }
-        
-        // Move to the next slot (probe)
         index = (index + 1) % SIZE;
-        
-        // Check if we've circled back to the starting index
         if (index == startIndex) {
             cout << "Hash table is full! Cannot insert." << endl;
             return;
         }
     }
 
-    // Insert new key-value pair at the found empty slot (when occupied[index] is false)
+    // Insert new key-value pair
     keys[index] = key;
     values[index] = value;
     occupied[index] = true;
@@ -49,28 +44,19 @@ void insert(int key, string value) {
 
 // Delete a key
 void remove(int key) {
-    // 1. Calculate the initial index
     int index = hashFunction(key);
-    int startIndex = index; // To detect if a full circle has been made
+    int startIndex = index;
 
-    // 2. Linear probe to find the key
     while (occupied[index]) {
         if (keys[index] == key) {
-            // Key found: perform lazy deletion
-            occupied[index] = false;
+            occupied[index] = false; // Lazy deletion
             cout << "Key " << key << " deleted." << endl;
             return;
         }
-        
-        // Move to the next slot (probe)
         index = (index + 1) % SIZE;
-        
-        // Check if we've circled back to the starting index without finding the key
-        if (index == startIndex)
-            break; // Stop probing
+        if (index == startIndex) break; // Circled back to start
     }
-    
-    // 3. Key not found (loop exited because 'occupied[index]' was false or we broke out)
+
     cout << "Key " << key << " not found!" << endl;
 }
 
@@ -81,12 +67,10 @@ string search(int key) {
 
     while (occupied[index]) {
         if (keys[index] == key) {
-            return values[index]; // Key found
+            return values[index];
         }
-
         index = (index + 1) % SIZE;
-        if (index == startIndex)
-            break; // Circled back to start
+        if (index == startIndex) break; // Circled back to start
     }
 
     return "Key not found";
@@ -121,7 +105,7 @@ int main() {
     cout << "Search for key 5: " << search(5) << endl;
 
     cout << endl;
-    remove(12); // Delete a key
+    remove(12);
     remove(7);
     remove(100); // Key not present
 
